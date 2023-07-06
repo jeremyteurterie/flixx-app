@@ -3,20 +3,20 @@ const global = {
 };
 
 async function displayPopularMovies() {
-  const results = await fetchAPIData('movie/popular');
+  const { results } = await fetchAPIData('movie/popular');
 
   results.forEach((movie) => {
     const div = document.createElement('div');
     div.classList.add('card');
     div.innerHTML = `
-    <a href="movie-details.html?id=${movie.id}">
+            <a href="movie-details.html?id=${movie.id}">
     ${
       movie.poster_path
         ? `      <img
-    src="https://image.tmdb.org/t/p/w500${movie.poster_path}"
-    class="card-img-top"
-    alt="${movie.title}"
-    />`
+            src="https://image.tmdb.org/t/p/w500${movie.poster_path}"
+            class="card-img-top"
+            alt="${movie.title}"
+            />`
         : `<img src="images/no-image.jpg" class="card-img-top" alt="Movie Title" />`
     }
     </a>
@@ -26,9 +26,9 @@ async function displayPopularMovies() {
         <small class="text-muted">Release: ${movie.release_date}</small>
       </p>
     </div>`;
-  });
 
-  document.querySelector('#popular-movies').appendChild(div);
+    document.querySelector('#popular-movies').appendChild(div);
+  });
 }
 
 // Fetch data from tmdb api
@@ -58,24 +58,22 @@ function highlightActiveLink() {
 // Init App
 function init() {
   switch (global.currentPage) {
-    case '/':
-    case './index.html':
+    case '/devlog/projects/bradtraversy/flixx-app/':
       displayPopularMovies();
       break;
-    case '/show.html':
+    case '/devlog/projects/bradtraversy/flixx-app/shows.html':
       console.log('Shows');
       break;
-    case '/movie-details.html':
+    case '/devlog/projects/bradtraversy/flixx-app/movie-details.html':
       console.log('Movies Details');
       break;
-    case '/tv-details.html':
+    case '/devlog/projects/bradtraversy/flixx-app/tv-details.html':
       console.log('TV Details');
       break;
-    case '/search.html':
+    case '/devlog/projects/bradtraversy/flixx-app/search.html':
       console.log('Search');
       break;
   }
-
   highlightActiveLink();
 }
 
